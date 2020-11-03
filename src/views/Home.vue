@@ -1,18 +1,31 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div id="home">
+    <h1 class="h1">home</h1>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { getBannerData, getUserData } from "@/api/data";
 
 export default {
   name: "Home",
-  components: {
-    HelloWorld
+  components: {},
+  async mounted() {
+    let BannerRes = await getBannerData();
+    console.log(BannerRes);
+    let userRes = await getUserData();
+    console.log(userRes);
   }
 };
 </script>
+
+<style lang="scss" scoped>
+#home {
+  .h1 {
+    width: 3.75rem;
+    height: 1rem;
+    background-color: skyblue;
+  }
+}
+</style>
