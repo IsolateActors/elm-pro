@@ -5,7 +5,7 @@ const baseUrl =
   process.env.NODE_ENV === "development"
     ? config.baseUrl.dev
     : config.baseUrl.pro;
-console.log(process.env.NODE_ENV);
+// console.log(process.env.NODE_ENV);
 
 class HttpRequest {
   constructor(baseUrl) {
@@ -32,7 +32,7 @@ class HttpRequest {
         config.data = {
           msg: "hello world"
         };
-        console.log(config);
+        // console.log(config);
         return config;
       },
       error => {
@@ -47,7 +47,7 @@ class HttpRequest {
       res => {
         //处理响应
         console.log("处理响应");
-        console.log(res);
+        // console.log(res);
         return res.data;
       },
       error => {
