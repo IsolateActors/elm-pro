@@ -1,61 +1,78 @@
 <template>
   <div id="home">
-    <h1 class="h1"><span class="iconfont icon-changyonglogo40"></span>home</h1>
-    <van-button type="primary">主要按钮</van-button>
-    <van-button type="info">信息按钮</van-button>
-    <van-button type="default">默认按钮</van-button>
-    <van-button type="warning">警告按钮</van-button>
-    <van-button type="danger">危险按钮</van-button>
+    <van-nav-bar
+      title="标题"
+      left-text="返回"
+      right-text="按钮"
+      @click-left="onClickLeft"
+      @click-right="onClickRight"
+    >
+      <template #left>
+        <van-icon name="search" size="18" />
+      </template>
+      <template #title>
+        <span>{{ titlePosition }}</span>
+      </template>
+      <template #right>
+        <span class="iconfont icon-wode"></span>
+      </template>
+    </van-nav-bar>
   </div>
 </template>
 
 <script>
-// import Button from "vant/lib/button"; //全部导入方式不推荐
-import { Button } from "vant";
+import { NavBar, Icon } from "vant";
 // @ is an alias to /src
-import {
-  // getBannerData,
-  // getUserData,
-  getPosiData,
-  getEntriesData,
-  getRestaurantsData
-} from "@/api/data";
+import { getPosiData, getEntriesData, getRestaurantsData } from "@/api/data";
 
 export default {
   name: "Home",
   components: {
-    "van-button": Button
+    "van-nav-bar": NavBar,
+    "van-icon": Icon
+  },
+  data() {
+    return {
+      titlePosition: ""
+    };
+  },
+  methods: {
+    onClickLeft() {},
+    onClickRight() {}
   },
   async mounted() {
-    // let BannerRes = await getBannerData();
-    // console.log(BannerRes);
-    // let userRes = await getUserData();
-    // console.log(userRes);
+    // let posiRes = await getPosiData();
+    // console.log(posiRes);
+    getPosiData()
+      .then(result => {
+        this.titlePosition = result.name;
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
-    let posiRes = await getPosiData();
-    console.log(posiRes);
-    let entriesRes = await getEntriesData();
-    console.log(entriesRes);
-    let restaurantsRes = await getRestaurantsData();
-    console.log(restaurantsRes);
+    // let entriesRes = await getEntriesData();
+    // console.log(entriesRes);
+    (async () => {
+      let entriesRes = await getEntriesData();
+      console.log(entriesRes);
+    })();
+
+    // let restaurantsRes = await getRestaurantsData();
+    // console.log(restaurantsRes);
+    getRestaurantsData()
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 </script>
 
 <style lang="scss" scoped>
 #home {
-  .h1 {
-    // display: inline-flex; //不占满一行，占满内容
-    display: flex; //占满一行
-    align-items: center;
-    width: 3.75rem;
-    height: 1rem;
-    background-color: skyblue;
-    text-align: center;
-  }
-
-  .iconfont {
-    font-size: 50px;
-  }
+  width: 100vw;
 }
 </style>

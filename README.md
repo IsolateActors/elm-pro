@@ -16,6 +16,8 @@ express后台服务: ./server/index.js
 mockServeData: elm mock模拟数据
 
 字体图标：public/css =>index.html中引入
+
+vant导入配置：./babel.config.js
 ```
 
 ## Project setup
